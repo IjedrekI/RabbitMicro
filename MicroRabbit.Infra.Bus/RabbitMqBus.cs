@@ -54,9 +54,9 @@ public sealed class RabbitMqBus : IEventBus
         if(!_handlers.ContainsKey(eventName))
             _handlers.Add(eventName, new List<Type>());
 
-        if (_handlers[eventName].Any())
+        if (_handlers[eventName].Any(x => x.GetType() == handlerType))
         {
-            
+            throw new ArgumentException();
         }
     }
 }
